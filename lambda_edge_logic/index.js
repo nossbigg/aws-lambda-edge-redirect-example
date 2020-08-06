@@ -1,3 +1,4 @@
-exports.handler = (event, context) => {
-  console.log("hello world!");
+exports.handler = (event, context, callback) => {
+  const request = event.Records[0].cf.request;
+  callback(null, request);
 };
