@@ -22,10 +22,16 @@ resource "aws_cloudfront_distribution" "edge_redirect_cf_distribution" {
     viewer_protocol_policy = "redirect-to-https"
     target_origin_id       = "some-origin-id"
 
+    // disable caching for Lambda@Edge testing purposes
+    min_ttl     = 0
+    default_ttl = 0
+    max_ttl     = 0
+
     forwarded_values {
       cookies {
         forward = "all"
       }
+      headers      = ["*"]
       query_string = false
     }
 
