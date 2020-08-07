@@ -1,4 +1,15 @@
 exports.handler = (event, context, callback) => {
-  const request = event.Records[0].cf.request;
-  callback(null, request);
+  const response = {
+    status: "302",
+    statusDescription: "Found",
+    headers: {
+      location: [
+        {
+          key: "Location",
+          value: "https://nossbigg.github.io/aws-lambda-edge-redirect-example/",
+        },
+      ],
+    },
+  };
+  callback(null, response);
 };
