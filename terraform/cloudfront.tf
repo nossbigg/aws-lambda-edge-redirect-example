@@ -1,6 +1,8 @@
 resource "aws_cloudfront_distribution" "edge_redirect_cf_distribution" {
   enabled = true
 
+  depends_on = [aws_lambda_function.edge_redirect_cf_lambda_edge]
+
   origin {
     domain_name = "nossbigg.github.io"
     origin_id   = "some-origin-id"
@@ -14,8 +16,8 @@ resource "aws_cloudfront_distribution" "edge_redirect_cf_distribution" {
   }
 
   default_cache_behavior {
-    allowed_methods = ["HEAD","GET"]
-    cached_methods  = ["HEAD","GET"]
+    allowed_methods = ["HEAD", "GET"]
+    cached_methods  = ["HEAD", "GET"]
 
     viewer_protocol_policy = "redirect-to-https"
     target_origin_id       = "some-origin-id"
@@ -25,6 +27,13 @@ resource "aws_cloudfront_distribution" "edge_redirect_cf_distribution" {
         forward = "all"
       }
       query_string = false
+    }
+
+    lambda_function_association {
+      event_type = "origin-request"
+      // have to manually build ARN due to inability to use $LATEST for Lambda@Edge-CloudFront association
+      lambda_arn   = "${aws_lambda_function.edge_redirect_cf_lambda_edge.arn}:${aws_lambda_function.edge_redirect_cf_lambda_edge.version}"
+      include_body = false
     }
   }
 
