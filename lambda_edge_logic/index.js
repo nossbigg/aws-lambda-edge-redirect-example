@@ -5,6 +5,7 @@ exports.handler = (event, context, callback) => {
   const requestCountry = headers["cloudfront-viewer-country"][0].value;
   const countryCodeParam = `countryCode=${requestCountry}`;
 
+  // CHANGEME to own website to redirect to
   const redirectUrl = `https://nossbigg.github.io/aws-lambda-edge-redirect-example/?${countryCodeParam}`;
 
   const response = {

@@ -1,4 +1,6 @@
 resource "aws_cloudfront_distribution" "edge_redirect_cf_distribution" {
+  comment = "edge_redirect_cf_distribution"
+
   enabled = true
 
   depends_on = [aws_lambda_function.edge_redirect_cf_lambda_edge]
