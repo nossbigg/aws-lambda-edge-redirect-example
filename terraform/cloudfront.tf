@@ -3,8 +3,6 @@ resource "aws_cloudfront_distribution" "edge_redirect_cf_distribution" {
 
   enabled = true
 
-  depends_on = [aws_lambda_function.edge_redirect_cf_lambda_edge]
-
   origin {
     domain_name = "nossbigg.github.io"
     origin_id   = "some-origin-id"
