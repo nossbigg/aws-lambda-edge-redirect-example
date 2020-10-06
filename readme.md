@@ -24,7 +24,7 @@ This repository is a barebones example of using Terraform to provision an AWS La
 
 ## Usage
 
-- (Optional) You can change the URL to redirect to by changing the `redirectUrl` declared in `lambda_edge_logic/index.js`
+- (Optional) You can change the URL to redirect to by changing the `redirectUrl` declared in `lambda_logic/lambda_cf.js`
 - Go to `terraform/` and do `terraform apply` to provision the Lambda@Edge infrastructure
 - Use `aws cloudfront list-distributions` to list all existing distributions
 - Copy the `Item.DomainName` of the newly-provisioned CloudFront distribution
