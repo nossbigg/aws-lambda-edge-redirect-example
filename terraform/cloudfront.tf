@@ -38,7 +38,7 @@ resource "aws_cloudfront_distribution" "edge_redirect_cf_distribution" {
     lambda_function_association {
       event_type = "origin-request"
       // have to manually build ARN due to inability to use $LATEST for Lambda@Edge-CloudFront association
-      lambda_arn   = "${aws_lambda_function.edge_redirect_cf_lambda_edge.arn}:${aws_lambda_function.edge_redirect_cf_lambda_edge.version}"
+      lambda_arn   = "${aws_lambda_function.lambda_cf.arn}:${aws_lambda_function.lambda_cf.version}"
       include_body = false
     }
   }
