@@ -7,6 +7,7 @@ exports.handler = (event, context, callback) => {
 
   // CHANGEME to own website to redirect to
   const redirectUrl = `https://nossbigg.github.io/aws-lambda-edge-redirect-example/?${countryCodeParam}`;
+  console.log(`lambda_cf: redirect to '${redirectUrl}'`);
 
   const response = {
     status: "302",

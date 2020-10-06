@@ -63,6 +63,18 @@ resource "aws_iam_role_policy_attachment" "lambda_cf_role_policy_attach" {
   policy_arn = aws_iam_policy.lambda_cf_role_policy.arn
 }
 
+# logging
+resource "aws_cloudwatch_log_group" "lambda_cf_logging_cloudwatch" {
+  provider          = aws.aws_sg
+  name              = "/aws/lambda/us-east-1.${aws_lambda_function.lambda_cf.function_name}"
+  retention_in_days = 14
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_cf_logging" {
+  role       = aws_iam_role.lambda_cf_role.name
+  policy_arn = aws_iam_policy.lambda_logging_policy.arn
+}
+
 # need not provision the following service-linked roles if already present in AWS infra
 resource "aws_iam_service_linked_role" "lambda_cf_role_replicator" {
   aws_service_name = "replicator.lambda.amazonaws.com"
