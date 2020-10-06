@@ -40,29 +40,6 @@ resource "aws_iam_role" "lambda_cf_role" {
 EOF
 }
 
-resource "aws_iam_policy" "lambda_cf_role_policy" {
-  name = "lambda_cf_role_policy"
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "Stmt1596793881581",
-      "Action": "*",
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
-}
-EOF
-}
-
-resource "aws_iam_role_policy_attachment" "lambda_cf_role_policy_attach" {
-  role       = aws_iam_role.lambda_cf_role.name
-  policy_arn = aws_iam_policy.lambda_cf_role_policy.arn
-}
-
 # logging
 resource "aws_cloudwatch_log_group" "lambda_cf_logging_cloudwatch" {
   provider          = aws.aws_sg
