@@ -1,4 +1,7 @@
 exports.handler = (event, context, callback) => {
+  console.log("## CONTEXT: " + serialize(context));
+  console.log("## EVENT: " + serialize(event));
+
   const request = event.Records[0].cf.request;
   const headers = request.headers;
 
@@ -22,4 +25,8 @@ exports.handler = (event, context, callback) => {
     },
   };
   callback(null, response);
+};
+
+const serialize = (object) => {
+  return JSON.stringify(object, null, 2);
 };
